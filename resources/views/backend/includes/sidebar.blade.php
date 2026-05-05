@@ -889,9 +889,6 @@
                             </a>
                         </li>
                     @endcan
-<<<<<<< HEAD
-                @endif
-=======
                     @endif
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.ldap-user-listing') ? 'active' : '' }}"
@@ -911,8 +908,7 @@
                 </ul>
             </li>
             @endcan
-            @endif
-
+        
             <!--==================================================================-->
             <li class="divider"></li>
 
@@ -1103,8 +1099,7 @@
             @endcan
             @endif
 
->>>>>>> 92427921 (Create Language Settings page under settings tab and connect it with existing default language option #449)
-            @endif
+      
 
             @if ($logged_in_user->hasRole('teacher'))
             @endif
@@ -1115,14 +1110,6 @@
 </div>
 
 @push('after-scripts')
-<<<<<<< HEAD
-    <script>
-        $(document).ready(function () {
-            $('.sidebar .nav-link').css({
-                'color': '#333',
-                'font-weight': '500',
-                'transition': 'all 0.3s ease'
-=======
 <script>
    $(document).ready(function () {
         if (window.location.pathname.includes('/admin/languages')) {
@@ -1207,7 +1194,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // Close all other dropdowns
             document.querySelectorAll('.nav-dropdown.open').forEach(function (openItem) {
                 if (openItem !== parent) openItem.classList.remove('open');
->>>>>>> 92427921 (Create Language Settings page under settings tab and connect it with existing default language option #449)
             });
 
             $('.sidebar .nav-dropdown-items').css({
