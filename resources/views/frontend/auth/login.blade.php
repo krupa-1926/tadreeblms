@@ -14,8 +14,8 @@
     /* Breadcrumb - Compact */
     .breadcrumb-section {
         background-color: #c1902d4a;
-        padding: 120px 0 40px !important;
-}
+        padding: 20px 0 !important; /* Reduced from 75px */
+    }
 
     /* Card Styling - Glassmorphic & Compact */
     .card {
@@ -255,14 +255,12 @@
                     {{-- Captcha --}}
                     <div class="form-group">
                         <div class="captcha-container">
-                            <canvas
-                                id="captchaCanvas"
-                                width="170"
-                                 height="50">
-                            </canvas>                            
+                          
+                            <canvas id="captchaCanvas" width="160" height="50"></canvas>
                             <button type="button" id="refreshCaptcha" style="border:none; background:none; cursor:pointer;">
                                 🔄
                             </button>
+                            <input type="hidden" id="captchaHidden" name="captcha_hidden">
 
                             <input type="text"
                                 id="captcha-input"
@@ -307,12 +305,13 @@
 </div>
 {{-- KEEP SCRIPT INSIDE THE SECTION --}}
 @push('after-scripts')
+
 <script>
 
 let generatedCaptcha = '';
 
+// Generate Random Captcha
 
-//  Generate Random Captcha
 function generateCaptchaText(length = 6) {
 
     const chars =
@@ -429,7 +428,6 @@ function generateNewCaptcha() {
     $('#captcha-error').text('');
 }
 
-
 //  Validate Captcha
 
 function validateCaptcha() {
@@ -460,8 +458,7 @@ $(document).ready(function () {
 
         $('#captcha-error').text('');
 
-        //  Validate Captcha First
-        
+       
         if (!validateCaptcha()) {
 
             $('#captcha-error')
@@ -483,14 +480,12 @@ $(document).ready(function () {
         $btn
             .prop('disabled', true)
             .text('Processing...');
+
         $.ajax({
 
             type: 'POST',
-
             url: $form.attr('action'),
-
             data: $form.serialize(),
-
             dataType: 'json',
 
             success: function (response) {
@@ -541,7 +536,6 @@ $(document).ready(function () {
 });
 
 </script>
-
 @endpush
 
 @endsection

@@ -47,18 +47,26 @@ class LoginController extends Controller
      * Show login form with visual captcha
      */
     public function showLoginForm()
-{
-    if (request()->ajax()) {
+    {
+        if (request()->ajax()) {
+            return [
+                'socialLinks' => (new Socialite)->getSocialLinks(),
+            ];
+        }
 
-        return [
-            'socialLinks' => (new Socialite)->getSocialLinks(),
-        ];
+        return view('frontend.auth.login');
     }
 
-    return view('frontend.auth.login');
-}
+    public function refreshCaptcha()
+    {
+        $captcha = CaptchaGenerator::generate();
 
-   
+        return response()->json([
+            'captcha' => $captcha['code'],
+            'captcha_question' => 'Enter the code shown above',
+            'captcha_image' => $captcha['image'],
+        ]);
+    }
 
     /**
      * Get login username field
@@ -74,7 +82,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make(
-        $request->all(),
+            $request->all(),
             [
                 'email' => 'required|email|max:255',
                 'password' => 'required|min:6',
@@ -87,6 +95,7 @@ class LoginController extends Controller
                 'errors' => $validator->errors(),
             ], 422);
         }
+
 
         $credentials = [
             'email'      => $request->email,
