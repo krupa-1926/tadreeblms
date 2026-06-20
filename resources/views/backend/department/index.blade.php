@@ -11,6 +11,13 @@
       .dropdown-item{
         border-bottom: none;
       }
+      .download-template-btn {
+        white-space: nowrap;
+    }
+
+    .custom-file-upload-wrapper {
+        min-width: 380px;
+    }
    
     </style>
 @endpush
@@ -21,7 +28,7 @@
 
     <div class="pb-3">
         <div class="d-flex justify-content-between">
-            <h4>@lang('menus.backend.sidebar.department')</h4>
+            <!-- <h4>@lang('menus.backend.sidebar.department')</h4> -->
 
             @can('blog_create')
                 <div>
@@ -48,7 +55,7 @@
 
                         @csrf
 
-                        <div class="d-flex">
+                        <div class="d-flex align-items">
 
                             <div class="custom-file-upload-wrapper" style="margin-top:18px;">
                                 <input type="file"
@@ -68,6 +75,12 @@
                                     value="submit">
                                 @lang('Import')
                             </button>
+
+                            <a href="{{ route('admin.department.template.download') }}"
+                                class="btn btn-light border ml-3 download-template-btn">
+                                    <i class="fa fa-download"></i>
+                                    Download Template
+                            </a>
 
                         </div>
 

@@ -20,11 +20,19 @@ use App\Http\Controllers\Backend\Admin\CourseFeedbackController;
 use App\Http\Controllers\Backend\Admin\AssessmentAccountsController ;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\Admin\TestQuestionController;
+use App\Http\Controllers\Backend\Admin\DepartmentController as AdminDepartmentController;
 use App\Http\Controllers\Frontend\Auth\LoginController;
 use App\Ldap\LdapUser;
 use LdapRecord\Container;
+
+Route::get(
+    'user/department/template/download',
+    [AdminDepartmentController::class, 'downloadTemplate']
+)->name('admin.department.template.download');
+
 Route::get('/admin/course-assignment', [AssessmentController::class,'index'])
 ->name('admin.course.assign');
+
 Route::get('admin/asmnt_0_withcourse', [AssessmentAccountsController::class, 'createWithCourse']);
 Route::get('/lesson/check-course', [App\Http\Controllers\Backend\Admin\LessonsController::class, 'checkCourse'])
     ->name('lessons.course.check');
